@@ -11,16 +11,15 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let temp = [];
-    
-    nums.forEach((item,index) => {
-        let i = nums.findIndex(j => j === target - item);
+    // 利用对象缓存计算结果，减少空间复杂度
+    let temp = {};
 
-        if (i > -1 && index !== i && !temp.includes(i) && !temp.includes(index)) {
-            temp = [...temp,index,i]
+    for(let i = 0;i< nums.length;i++) {
+        let j = target - nums[i];
+        if ((temp[j] !== undefined )&& (temp[j] !== i)) {
+            return [temp[j],i]
         }
-    })
-
-    return temp;
+        temp[nums[i]] = i
+    }
 };
 // @lc code=end
