@@ -9,26 +9,49 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function(nums=[]) {
     const result = [],
-          temp = {},
           length = nums.length;
 
+    nums = nums.sort((a,b) => a - b);
+
     for (let i = 0; i < length; i++) {
-        const r1 = nums[i];
-        
-        for (let j = i+1; j < length; j++) {
-            const r2 = nums[j],
-                  r3 = 0 - r1 - r2;
-            
-            if (temp[r2]) {
-                result.push([...temp[r2],r2])
+
+        if (i >=1 && nums[i] === nums[i - 1]) {
+            continue;
+        }
+
+        let j = i + 1,
+            k = length - 1;
+
+        while(j < k) {
+            const sum = nums[i] + nums[j] + nums[k];
+
+            if (sum > 0) {
+                k--;
+                while(nums[k] === nums[k+1] && k > j){
+                    k--;
+                }
+            } else if (sum === 0) {
+                result.push([nums[i],nums[j],nums[k]]);
+
+                k--;
+                while(nums[k] === nums[k+1] && k > j){
+                    k--;
+                }
+                
+                j++;
+                while(nums[j-1] === nums[j] && j < k){
+                    j++;
+                }
             } else {
-                temp[r3] = [r1,r2]
+                j++
+                while(nums[j-1] === nums[j] && j < k){
+                    j++;
+                }
             }
         }
     }
     return result;
 };
 // @lc code=end
-
