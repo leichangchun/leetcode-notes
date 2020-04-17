@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceFolder}\\119.杨辉三角-ii.js"
+            "program": "${workspaceFolder}\\46.全排列.js"
         }
     ]
 }
